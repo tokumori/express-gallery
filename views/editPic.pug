@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+  meta(charset="UTF=8")
+  title Express Gallery
+body
+  h1(class="header") Welcome to the gallery!!!
+  div(class="submitheader") Edit your pic:
+  form(
+    id="Put"
+
+    method="POST"
+    action="/gallery/"+idNum+"?_method=PUT"
+    enctype="application/x-www-form-urlencoded"
+  )
+    div
+      label(class="authorlabel" for="author") Author:
+      input(
+        class="authorfield"
+        type="text"
+        name="author"
+        value=author
+      )
+    div
+      label(class="linklabel" for="link") Link:
+      input(
+        class="linkfield"
+        type="text"
+        name="link"
+        value=link
+      )
+    div
+      label(class="descriptionlabel" for="description") Description:
+      textarea(
+        class="descriptionfield"
+        name="description"
+        form="Put"
+      ) #{description}
+    div.submit
+      input(
+        type="submit"
+        value="Submit"
+      )

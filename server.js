@@ -5,12 +5,14 @@ var querystring = require('querystring');
 var bodyParser = require('body-parser');
 var pug = require('pug');
 var path = require('path');
+var methodOverride = require('method-override');
 var Gallery = require('./Gallery');
 
 app.set(path.resolve(__dirname, 'views'), 'views');
 app.set('view engine', 'pug');
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 
 app.get('/', function (req, res, next) {
   Gallery.view(function (err, results) {
@@ -51,7 +53,7 @@ app.get('/gallery/:id/edit', function (req, res, next) {
     if (err) {
       return next(err);
     }
-    res.send('Captain Placeholder');
+    res.render('editPic', result);
   });
 });
 
