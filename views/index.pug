@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+  meta(charset="UTF=8")
+  title Express Gallery
+body
+  h1(class='header') Welcome to the gallery!!!
+  img(
+    src=pics[0].link
+    class='headerpic'
+  )
+  hr
+  - var n = 1
+  ul
+    while n < pics.length
+      li
+        img(
+          src=pics[n].link
+          class='listpics'
+        )
+        div #{pics[n].author} -- #{pics[n].link}
+        - n++

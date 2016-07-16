@@ -12,12 +12,17 @@ app.set('view engine', 'pug');
 
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/', function (req, res) {
-  res.render('index');
+app.get('/', function (req, res, next) {
+  Gallery.view(function (err, results) {
+    if (err) {
+      return next(err);
+    }
+    res.render('index', results);
+  });
 });
 
 app.get('/gallery/new', function (req, res) {
-  res.send('Placeholder');
+  res.render('newPic');
 });
 
 app.get('/gallery/:id', function (req, res, next) {

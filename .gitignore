@@ -30,6 +30,5 @@ bower_components
 node_modules
 *.DS_Store
 data/
-index.pug
 nodemon.json
 gallery.json
