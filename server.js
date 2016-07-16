@@ -57,7 +57,18 @@ app.put('/gallery/:id', function (req, res, next) {
     if (err) {
       return next(err);
     }
-    res.render('gallery', result);
+    res.render('gallery', result.data);
+  });
+});
+
+app.delete('/gallery/:id', function (req, res, next) {
+  var id = parseInt(req.params.id);
+  Gallery.delete(id, function (err, result) {
+    if (err) {
+      return next(err);
+    }
+    //Possibly make render page for deletions
+    res.send('Deleted');
   });
 });
 

@@ -6,7 +6,8 @@ var idNum = 0;
 module.exports = {
   add: addGallery,
   find: findGallery,
-  edit: editGallery
+  edit: editGallery,
+  delete: deleteGallery
 };
 
 var JSON_DATA_PATH = path.resolve('data', 'gallery.json');
@@ -50,18 +51,41 @@ function findGallery (id, callback) {
   });
 }
 
-function editGallery (id, data, callback) {
-  findGallery(id, function (err, result, galleries) {
+function editGallery (id, chunk, callback) {
+  findGallery(id, function (err, data, galleries) {
     if (err) {
       return callback(err);
     }
-    result.author = data.author;
-    result.link = data.link;
-    result.description = data.description;
+    data.author = chunk.author;
+    data.link = chunk.link;
+    data.description = chunk.description;
     fs.writeFile(JSON_DATA_PATH, JSON.stringify(galleries), function (err) {
       if (err) {
         return callback(err);
       }
+      var result = {
+        status: 'OK',
+        data: data
+      };
+      return callback(null, result);
+    });
+  });
+}
+
+function deleteGallery (id, callback) {
+  findGallery(id, function (err, data, galleries) {
+    if (err) {
+      return callback(err);
+    }
+    galleries.splice(id, 1);
+    fs.writeFile(JSON_DATA_PATH, JSON.stringify(galleries), function (err) {
+      if (err) {
+        return callback(err);
+      }
+      var result = {
+        status: 'OK',
+        data: data
+      };
       return callback(null, result);
     });
   });
