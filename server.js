@@ -7,8 +7,6 @@ var pug = require('pug');
 var path = require('path');
 var Gallery = require('./Gallery');
 
-
-
 app.set(path.resolve(__dirname, 'views'), 'views');
 app.set('view engine', 'pug');
 
@@ -43,7 +41,7 @@ app.post('/gallery', function (req, res, next) {
 });
 
 app.get('/gallery/:id/edit', function (req, res, next) {
-  var id = req.params.id;
+  var id = parseInt(req.params.id);
   Gallery.find(id, function (err, result) {
     if (err) {
       return next(err);
@@ -53,12 +51,13 @@ app.get('/gallery/:id/edit', function (req, res, next) {
 });
 
 app.put('/gallery/:id', function (req, res, next) {
+  var id = parseInt(req.params.id);
   var locals = req.body;
-  Gallery.edit(locals, function (err, result) {
+  Gallery.edit(id, locals, function (err, result) {
     if (err) {
       return next(err);
     }
-    res.render('gallery', result.data);
+    res.render('gallery', result);
   });
 });
 
