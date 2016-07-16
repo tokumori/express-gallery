@@ -4,6 +4,27 @@ head
   meta(charset="UTF=8")
   title Express Gallery
 body
-  img(src=link)
-  p Uploaded by: #{author}
+  h1(class="header") Express Gallery
+  p= author + ' -- ' + link
+  img(
+    src=link
+    class="headerpic"
+  )
   p= description
+  span
+    form(
+      class="editor"
+      method="GET"
+      action="/gallery/"+idNum+"/edit"
+    )
+      button(
+        type="submit"
+      ) Edit this gallery
+    form(
+      class="delete"
+      method="POST"
+      action="/gallery/"+idNum+"?_method=DELETE"
+    )
+      button(
+        type="submit"
+      ) Delete this gallery
