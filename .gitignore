@@ -32,3 +32,5 @@ node_modules
 data/
 nodemon.json
 gallery.json
+Public/styles/
+gulpfile.js

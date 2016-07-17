@@ -56,7 +56,6 @@ function findGallery (id, callback) {
       if (galleries[i]['idNum'] === id) {
         return callback(null, galleries[i], galleries);
       }
-
     }
     callback(new Error('ufsdjlkzfujklmkgjduvcklmbn'));
   });

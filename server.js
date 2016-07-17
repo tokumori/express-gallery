@@ -10,9 +10,11 @@ var Gallery = require('./Gallery');
 
 app.set(path.resolve(__dirname, 'views'), 'views');
 app.set('view engine', 'pug');
+app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
+
 
 app.get('/', function (req, res, next) {
   Gallery.view(function (err, results) {
